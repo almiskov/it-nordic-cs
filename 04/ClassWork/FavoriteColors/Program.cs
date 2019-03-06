@@ -25,6 +25,8 @@ namespace FavoriteColors
 
 		static void Main(string[] args)
 		{
+			InitializeConsole();
+
 			// Выводим пользователю цвета палитры для выбора
 			string[] colorsNamesArray = Enum.GetNames(typeof(Colors));
 			Console.WriteLine("Цвета палитры:");
