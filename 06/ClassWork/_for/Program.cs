@@ -18,35 +18,37 @@ namespace _for
 			};
 
 			double sumForDay;
-			double sumforWeek = 0f;
+			double sumForWeek = 0;
+			int marksCounter = 0;
 
-			for(int i = 0; i < marks.Length; i++)
+			for (int i = 0; i < marks.Length; i++)
 			{
 				sumForDay = 0;
 
-				if(marks[i] != null)
+				if (marks[i] != null)
 				{
 					for (int j = 0; j < marks[i].Length; j++)
 					{
 						sumForDay += marks[i][j];
+						sumForWeek += marks[i][j];
+						marksCounter++;
 					}
-					double dayAverage = Math.Round(sumForDay / marks[i].Length, precision);
-
-					Console.WriteLine($"Средняя оценка за день {i}: {dayAverage}");
-					sumforWeek += dayAverage;
-
+					Console.WriteLine($"Средний балл за день {i + 1}: { Math.Round(sumForDay / marks[i].Length, precision)}");
+				}
+				else
+				{
+					Console.WriteLine($"Средний балл за день {i + 1}: N/A");
 				}
 			}
 
-			Console.WriteLine($"Средняя оценка за неделю: {Math.Round(sumforWeek / marks.Length, precision)}");
-
-			// доделать
+			Console.WriteLine($"Средний балл за неделю: {Math.Round(sumForWeek / marksCounter, precision)}");
+			Console.ReadKey();
 		}
 	}
 }
 
 
-	/*
-		
-	
-	*/
+/*
+
+
+*/
