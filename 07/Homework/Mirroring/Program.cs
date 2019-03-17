@@ -10,7 +10,8 @@ namespace Mirroring
 
 			string mirroredText = GetMirroredText(text);
 
-			Console.WriteLine(mirroredText);
+			Console.WriteLine("Отражённый текст в нижнем регистре:");
+			Console.WriteLine(mirroredText.ToLower());
 
 			Console.ReadKey();
 		}
