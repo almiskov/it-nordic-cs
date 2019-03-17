@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Savings_v2._0
 {
@@ -11,22 +12,42 @@ namespace Savings_v2._0
 			this.writer = writer;
 		}
 
-		public void WriteSuggestion(string text)
+		#region Suggestions And Results Output Methods
+
+		private void WriteSuggestion(string text)
 		{
 			writer.WriteLineYellow(text);
 		}
 
-		public void WriteResult(string text)
+		private void WriteResult(string text)
 		{
 			writer.WriteLineGreen(text);
 		}
 
-		public void WriteError(string text)
+		public void WriteDaysToDesiredSumLeft(int daysToDesiredSumLeft)
+		{
+			WriteResult($"Необходимое количество дней для накопления желаемой суммы: {daysToDesiredSumLeft}");
+		}
+
+		#endregion
+
+		#region Errors Output Methods
+
+		private void WriteError(string text)
 		{
 			writer.WriteLineRed(text);
 		}
 
-		public decimal ReadUserInput()
+		public void WriteDesiredSumIsAlreadyExistsError()
+		{
+			WriteError("У вас уже есть желаемая сумма.");
+		}
+
+		#endregion
+
+		#region Read User Input Methods
+
+		private decimal ReadPositiveSum()
 		{
 			decimal inputNumber;
 
@@ -42,15 +63,39 @@ namespace Savings_v2._0
 					}
 					else
 					{
-						writer.WriteLineRed("Введено неверное значение. Повторите ввод.");
+						WriteError("Введённая сумма должна быть положительным числом.");
 					}
 				}
 				catch (Exception e)
 				{
-					writer.WriteLineRed($"Ошибка: {e.GetType()}. Повторите ввод.");
+					WriteError($"Ошибка: {e.GetType()}: {e.Message} Повторите ввод.");
 					// throw;
 				}
 			}
 		}
+
+		public decimal ReadFirstPayment()
+		{
+			WriteSuggestion("Введите сумму первоначального взноса в рублях:");
+
+			return ReadPositiveSum();
+		}
+
+		public decimal ReadDailyPercantageOfIncome()
+		{
+			WriteSuggestion($"Введите ежедневный процент дохода в виде десятичной дроби(1 % = 0{Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator}01):");
+
+			return ReadPositiveSum();
+
+		}
+
+		public decimal ReadDesiredSum()
+		{
+			WriteSuggestion("Введите желаемую сумму накопления в рублях:");
+
+			return ReadPositiveSum();
+		}
+
+		#endregion
 	}
 }

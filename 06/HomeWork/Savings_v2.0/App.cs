@@ -13,18 +13,13 @@ namespace Savings_v2._0
 
 		public void Run()
 		{
-			appIO.WriteSuggestion("Введите сумму первоначального взноса в рублях:");
-			decimal firstPayment = appIO.ReadUserInput();
-
-			appIO.WriteSuggestion($"Введите ежедневный процент дохода в виде десятичной дроби(1 % = 0{Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator}01):");
-			decimal dailyPercantageOfIncome = appIO.ReadUserInput();
-
-			appIO.WriteSuggestion("Введите желаемую сумму накопления в рублях:");
-			decimal desiredSum = appIO.ReadUserInput();
+			decimal firstPayment = appIO.ReadFirstPayment();
+			decimal dailyPercantageOfIncome = appIO.ReadDailyPercantageOfIncome();
+			decimal desiredSum = appIO.ReadDesiredSum();
 
 			int daysToDesiredSumLeft = CountDays(firstPayment, dailyPercantageOfIncome, desiredSum);
 
-			appIO.WriteResult($"Необходимое количество дней для накопления желаемой суммы: {daysToDesiredSumLeft}");
+			appIO.WriteDaysToDesiredSumLeft(daysToDesiredSumLeft);
 		}
 
 		private int CountDays(decimal firstPayment, decimal dailyPercantageOfIncome, decimal desiredSum)
@@ -43,7 +38,7 @@ namespace Savings_v2._0
 			}
 			else
 			{
-				appIO.WriteError("У вас уже есть желаемая сумма.");
+				appIO.WriteDesiredSumIsAlreadyExistsError();
 			}
 
 			return dayCounter;
