@@ -44,9 +44,9 @@ namespace Brackets
 			bool isAnythingInStack;
 			char topBracketInStack;
 
-			bool canBeTurnedIntoOpeningBracketIfClosingProperly;
+			bool isBracketClosesTopBracketInStack;
 			/*
-			Читается как "можем ли мы должным образом превратить скобку, если она закрывающаяся, в соответствующую ей открывающуюся?".
+			"закрывает ли текущая скобка верхнюю скобку в стэке?".
 			Зависит в том числе от метода расширения TurnIntoOpeningBracketOrDefault() для char,
 			который превращает закрывающуюся скобку в открывающуюся, но если не может этого сделать, возвращает \u0000.
 			*/
@@ -55,17 +55,17 @@ namespace Brackets
 			{
 				isAnythingInStack = stack.TryPeek(out topBracketInStack);
 
-				canBeTurnedIntoOpeningBracketIfClosingProperly =  // тут что-то с названием надо переосмыслить
+				isBracketClosesTopBracketInStack =  // тут что-то с названием надо переосмыслить
 					topBracketInStack == bracket.TurnIntoOpeningBracketOrDefault() &&
 					topBracketInStack != default(char);
 				/*
 				В принципе можно обойтись и без проверки на дефолт, но тогда существует возможность получить true,
 				когда стэк пустой и текущая скобка в строке открывающаяся. Хоть в этом случае isAnythingInStack будет false,
 				и дальнейшее условие всё равно не даст вытащить что бы то ни было из стэка,
-				но более осмысленной переменной мне в голову не пришло, поэтому лучше, наверное, так оставить
+				но более осмысленной переменной в голову не приходит, поэтому лучше, наверное, так оставить
 				*/
 
-				if (isAnythingInStack && canBeTurnedIntoOpeningBracketIfClosingProperly)
+				if (isAnythingInStack && isBracketClosesTopBracketInStack)
 					stack.Pop();
 				else
 					stack.Push(bracket);
