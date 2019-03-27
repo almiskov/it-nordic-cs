@@ -25,7 +25,7 @@ namespace People
 
 				if (string.IsNullOrWhiteSpace(name) || name.Length < 2)
 				{
-					_writer.WriteLineRed("Name is too short or has't been input. Please try again.");
+					_writer.WriteLineRed("Name is too short or hasn't been input. Please try again.");
 				}
 				else
 				{
