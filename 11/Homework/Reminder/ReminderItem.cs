@@ -14,7 +14,7 @@ namespace Reminder
 
 		public bool IsOutdated
 		{
-			get { return TimeToAlarm < TimeSpan.Zero ? true : false; }
+			get { return TimeToAlarm < TimeSpan.Zero; }
 		}
 
 		public ReminderItem(DateTimeOffset alarmDate, string alarmMessage)
