@@ -11,7 +11,7 @@
 
 		protected override void Log(MessageType messageType, string message)
 		{
-			switch (messageType)
+			switch (messageType) // тут всё-таки можно обернуть всю эту штуку в цикл, а не в каждом кейсе делать цикл
 			{
 				case MessageType.Error:
 					for (int i = 0; i < _logWriters.Length; i++)

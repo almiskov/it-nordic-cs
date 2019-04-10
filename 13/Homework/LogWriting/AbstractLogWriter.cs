@@ -18,6 +18,9 @@
 		}
 
 		protected abstract void Log(MessageType messageType, string message);
+
+
+		// формат записи лучше написать здесь, и чтобы её возвращал метод, а в наследниках просто вызывать этот метод
 	}
 }
 
