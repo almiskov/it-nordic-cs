@@ -5,11 +5,16 @@ namespace LogWriting
 {
 	class FileLogWriter : AbstractLogWriter
 	{
+		private string _path;
+
+		public FileLogWriter(string path = "log.txt")
+		{
+			_path = path;
+		}
+
 		protected override void Log(MessageType messageType, string message)
 		{
-			string path = "log.txt"; // а этот лучше сделать параметром по умолчанию
-
-			using (StreamWriter sw = new StreamWriter(path, true))
+			using (StreamWriter sw = new StreamWriter(_path, true))
 			{
 				sw.WriteLine($"{DateTimeOffset.Now:yyyy-MM-ddTHH:mm:sszzz}\t{messageType}\t\t{message}");
 				sw.Flush();
