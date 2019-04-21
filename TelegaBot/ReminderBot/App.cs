@@ -43,9 +43,9 @@ namespace ReminderBot
 
 			t.Start();
 
-			Thread.Sleep(5000);
-
 			// Like runtime adding
+			
+			Thread.Sleep(5000);
 
 			_reminderStorage.Add(new ReminderItem(
 				TimeSpan.FromSeconds(10),
