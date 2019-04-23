@@ -17,6 +17,6 @@ namespace Reminder.Storage.Core
 
 		ReminderItem Get(Guid id);
 
-		List<ReminderItem> GetList(IEnumerable<ReminderItemStatus> status, int count, int startPosition);
+		List<ReminderItem> GetList(IEnumerable<ReminderItemStatus> statuses, int startPosition, int count);
 	}
 }

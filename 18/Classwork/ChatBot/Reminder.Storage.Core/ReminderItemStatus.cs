@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Reminder.Storage.Core
+﻿namespace Reminder.Storage.Core
 {
 	public enum ReminderItemStatus
 	{

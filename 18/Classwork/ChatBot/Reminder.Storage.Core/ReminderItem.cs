@@ -9,7 +9,7 @@ namespace Reminder.Storage.Core
 		public string Message { get; set; }
 		public string ContactId { get; private set; }
 		public TimeSpan TimeToSend => Date - DateTimeOffset.UtcNow;
-		//public bool IsOutdated => Date < DateTimeOffset.UtcNow;
+		public ReminderItemStatus Status { get; set; }
 
 		public ReminderItem(Guid id, DateTimeOffset date, string message, string contactId)
 		{

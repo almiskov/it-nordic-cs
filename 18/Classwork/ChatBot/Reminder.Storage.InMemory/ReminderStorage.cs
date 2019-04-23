@@ -7,6 +7,8 @@ namespace Reminder.Storage.InMemory
 	public class ReminderStorage : IReminderStorage
 	{
 		private Dictionary<Guid, ReminderItem> _storage;
+
+		public int Count => _storage.Count;
 		
 		public ReminderStorage()
 		{
@@ -15,8 +17,10 @@ namespace Reminder.Storage.InMemory
 
 		public void Add(ReminderItem reminderItem)
 		{
-			/// TODO: add custom exception throwing if already exists
-			_storage.Add(reminderItem.Id, reminderItem);
+			if (_storage.ContainsKey(reminderItem.Id))
+				throw new IdAlreadyContainedException("Inner dictionary already contains key");
+			else
+				_storage.Add(reminderItem.Id, reminderItem);
 		}
 
 		public ReminderItem Get(Guid id)
@@ -26,15 +30,24 @@ namespace Reminder.Storage.InMemory
 				: null;
 		}
 
-		public List<ReminderItem> GetList(IEnumerable<ReminderItemStatus> status, int count, int startPosition)
+		public List<ReminderItem> GetList(IEnumerable<ReminderItemStatus> statuses, int startPosition, int count)
 		{
+			/// TODO: понять, каким образом должен работать этот метод с такими входными параметрами,
+			/// зачем туда передавать несколько статусов,
+			/// и где у Dictionary start index, и что вообще может им считаться
+
+			//ReminderItem[] reminders = new ReminderItem[count];
+			//_storage.Values.CopyTo(reminders, 0);
+
 			throw new NotImplementedException();
 		}
 
 		public void Update(ReminderItem reminderItem)
 		{
-			/// TODO: add custom exception throwing if not found
-			_storage[reminderItem.Id] = reminderItem;
+			if(_storage.ContainsKey(reminderItem.Id))
+				_storage[reminderItem.Id] = reminderItem;
+			else
+				throw new KeyNotFoundException("Reminder not found");
 		}
 	}
 }
