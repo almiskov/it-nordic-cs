@@ -44,7 +44,7 @@ namespace Reminder.Domain
 				TimeSpan.Zero,
 				TimeSpan.FromMilliseconds(_deltaToCheckAwaitingReminders));
 
-			var ReadyRemindersSendTimer = new Timer(
+			var readyRemindersSendTimer = new Timer(
 				SendReadyReminders,
 				null,
 				TimeSpan.Zero,
@@ -65,15 +65,13 @@ namespace Reminder.Domain
 		{
 			var sendReminderModels = _storage
 				.Get(ReminderItemStatus.Ready)
-				.Where(r => r.IsTimeToSend)
-				.Select(r => 
+				.Select(r =>
 					new SendReminderModel
 					{
 						Id = r.Id,
 						Message = r.Message,
 						ContactId = r.ContactId
-					})
-				.ToList();
+					});
 
 			foreach(SendReminderModel sendReminder in sendReminderModels)
 			{
