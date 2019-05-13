@@ -5,17 +5,28 @@ using System.Threading.Tasks;
 using AspApplication.DataStore;
 using AspApplication.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace AspApplication.Controllers
 {
 	[Route("/api/cities")]
 	public class CitiesController : Controller
 	{
+		ILogger<CitiesController> _logger;
+		ICitiesDataStore _citiesDataStore;
+
+		public CitiesController(ILogger<CitiesController> logger, ICitiesDataStore citiesDataStore)
+		{
+			_logger = logger;
+			_citiesDataStore = citiesDataStore;
+		}
+
 		[HttpGet()]
 		public IActionResult GetCities()
 		{
-			var citiesDataStore = CitiesDataStore.GetInstance();
-			var cities = citiesDataStore.Cities;
+			_logger.LogInformation($"{nameof(GetCities)} called.");
+
+			var cities = _citiesDataStore.Cities;
 
 			return Ok(cities);
 		}
@@ -23,8 +34,7 @@ namespace AspApplication.Controllers
 		[HttpGet("{id}", Name = "GetCity")]
 		public IActionResult GetCity(int id)
 		{
-			var citiesDataStore = CitiesDataStore.GetInstance();
-			var city = citiesDataStore.Cities
+			var city = _citiesDataStore.Cities
 				.Where(x => x.Id == id)
 				.FirstOrDefault();
 
@@ -44,8 +54,12 @@ namespace AspApplication.Controllers
 				return BadRequest();
 			}
 
-			var citiesDataStore = CitiesDataStore.GetInstance();
-			var newCityId = citiesDataStore.Cities
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			var newCityId = _citiesDataStore.Cities
 				.Max(x => x.Id) + 1;
 
 			var newCity = new CityGetModel()
@@ -56,11 +70,11 @@ namespace AspApplication.Controllers
 				NumberOfPointsOfInterest = city.NumberOfPointsOfInterest
 			};
 
-			citiesDataStore.Cities.Add(newCity);
+			_citiesDataStore.Cities.Add(newCity);
 
 			return CreatedAtRoute(
 				"GetCity",
-				new { id = newCityId},
+				new { id = newCityId },
 				newCity);
 		}
 	}
