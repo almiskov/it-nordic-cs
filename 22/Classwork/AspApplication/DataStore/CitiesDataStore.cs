@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace AspApplication.DataStore
 {
-	public class CitiesDataStore
+	public class CitiesDataStore : ICitiesDataStore
 	{
-		private static CitiesDataStore _instance;
-
 		public List<CityGetModel> Cities { get; private set; }
 
-		private CitiesDataStore()
+		public CitiesDataStore()
 		{
 			Cities = new List<CityGetModel>()
 				{
@@ -20,13 +18,6 @@ namespace AspApplication.DataStore
 					new CityGetModel {Id = 2, Name = "New York", Description = "One of the biigest cities in the world"},
 					new CityGetModel {Id = 3, Name = "Stary Oskol", Description = "Just good city" }
 				};
-		}
-
-		public static CitiesDataStore GetInstance()
-		{
-			if (_instance == null)
-				_instance = new CitiesDataStore();
-			return _instance;
 		}
 	}
 }
