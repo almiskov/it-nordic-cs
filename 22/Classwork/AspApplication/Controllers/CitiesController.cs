@@ -63,5 +63,52 @@ namespace AspApplication.Controllers
 				new { id = newCityId},
 				newCity);
 		}
+
+		//[HttpDelete("{id}")]
+		//public IActionResult DeleteCity(int id)
+		//{
+		//	var citiesDataStore = CitiesDataStore.GetInstance();
+
+		//	var city = citiesDataStore.Cities
+		//		.Where(x => x.Id == id)
+		//		.FirstOrDefault();
+
+		//	if (city == null)
+		//	{
+		//		return NotFound();
+		//	}
+
+		//	citiesDataStore.Cities.Remove(city);
+
+		//	return Ok(city);
+		//}
+
+		//[HttpPut("{id}")]
+		//public IActionResult PutCity(int id, [FromBody]CityCreateModel newCity)
+		//{
+		//	if (city == null)
+		//	{
+		//		return BadRequest();
+		//	}
+
+		//	var citiesDataStore = CitiesDataStore.GetInstance();
+		//	var newCityId = citiesDataStore.Cities
+		//		.Max(x => x.Id) + 1;
+
+		//	var newCity = new CityGetModel()
+		//	{
+		//		Id = newCityId,
+		//		Name = city.Name,
+		//		Description = city.Description,
+		//		NumberOfPointsOfInterest = city.NumberOfPointsOfInterest
+		//	};
+
+		//	citiesDataStore.Cities.Add(newCity);
+
+		//	return CreatedAtRoute(
+		//		"GetCity",
+		//		new { id = newCityId },
+		//		newCity);
+		//}
 	}
 }
