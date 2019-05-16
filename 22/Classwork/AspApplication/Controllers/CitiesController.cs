@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using AspApplication.DataStore;
 using AspApplication.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -26,9 +24,16 @@ namespace AspApplication.Controllers
 		{
 			_logger.LogInformation($"{nameof(GetCities)} called.");
 
-			var cities = _citiesDataStore.Cities;
+			var outputCities = _citiesDataStore.Cities
+				.Select(x => new CityGetModel()
+				{
+					Id = x.Id,
+					Name = x.Name,
+					Description = x.Description,
+					NumberOfPointsOfInterest = x.NumberOfPointsOfInterest
+				});
 
-			return Ok(cities);
+			return Ok(outputCities);
 		}
 
 		[HttpGet("{id}", Name = "GetCity")]
@@ -43,13 +48,38 @@ namespace AspApplication.Controllers
 				return NotFound();
 			}
 
-			return Ok(city);
+			var outputCity = new CityGetModel()
+			{
+				Id = city.Id,
+				Name = city.Name,
+				Description = city.Description,
+				NumberOfPointsOfInterest = city.NumberOfPointsOfInterest
+			};
+
+			return Ok(outputCity);
+		}
+
+		[HttpDelete("{id}")]
+		public IActionResult RemoveCity(int id)
+		{
+			var city = _citiesDataStore.Cities
+				.Where(x => x.Id == id)
+				.FirstOrDefault();
+
+			if (city == null)
+			{
+				return NotFound();
+			}
+
+			_citiesDataStore.Cities.Remove(city);
+
+			return Ok();
 		}
 
 		[HttpPost("/api/cities")]
 		public IActionResult CreateCity([FromBody] CityCreateModel city)
 		{
-			if(city == null)
+			if (city == null)
 			{
 				return BadRequest();
 			}
@@ -62,7 +92,7 @@ namespace AspApplication.Controllers
 			var newCityId = _citiesDataStore.Cities
 				.Max(x => x.Id) + 1;
 
-			var newCity = new CityGetModel()
+			var newCity = new CityDataStoreModel()
 			{
 				Id = newCityId,
 				Name = city.Name,
@@ -78,51 +108,79 @@ namespace AspApplication.Controllers
 				newCity);
 		}
 
-		//[HttpDelete("{id}")]
-		//public IActionResult DeleteCity(int id)
-		//{
-		//	var citiesDataStore = CitiesDataStore.GetInstance();
+		[HttpPut("{id}")]
+		public IActionResult ReplaceCity(int id, [FromBody] CityPutModel newCity)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-		//	var city = citiesDataStore.Cities
-		//		.Where(x => x.Id == id)
-		//		.FirstOrDefault();
+			var city = _citiesDataStore.Cities
+				.Where(x => x.Id == id)
+				.FirstOrDefault();
 
-		//	if (city == null)
-		//	{
-		//		return NotFound();
-		//	}
+			if (city == null)
+			{
+				return NotFound();
+			}
 
-		//	citiesDataStore.Cities.Remove(city);
+			city.Name = newCity.Name;
+			city.Description = newCity.Description;
+			city.NumberOfPointsOfInterest = newCity.NumberOfPointsOfInterest;
 
-		//	return Ok(city);
-		//}
+			return CreatedAtRoute(
+				"GetCity",
+				new { id = city.Id },
+				city);
+		}
 
-		//[HttpPut("{id}")]
-		//public IActionResult PutCity(int id, [FromBody]CityCreateModel newCity)
-		//{
-		//	if (city == null)
-		//	{
-		//		return BadRequest();
-		//	}
+		[HttpPatch("{id}")]
+		public IActionResult PatchCity(int id, [FromBody] JsonPatchDocument<CityPatchModel> patch)
+		{
+			if (patch == null)
+			{
+				return BadRequest();
+			}
 
-		//	var citiesDataStore = CitiesDataStore.GetInstance();
-		//	var newCityId = citiesDataStore.Cities
-		//		.Max(x => x.Id) + 1;
+			var city = _citiesDataStore.Cities
+				.Where(x => x.Id == id)
+				.FirstOrDefault();
 
-		//	var newCity = new CityGetModel()
-		//	{
-		//		Id = newCityId,
-		//		Name = city.Name,
-		//		Description = city.Description,
-		//		NumberOfPointsOfInterest = city.NumberOfPointsOfInterest
-		//	};
+			if (city == null)
+			{
+				return NotFound();
+			}
 
-		//	citiesDataStore.Cities.Add(newCity);
+			var cityToPatch = new CityPatchModel();
 
-		//	return CreatedAtRoute(
-		//		"GetCity",
-		//		new { id = newCityId },
-		//		newCity);
-		//}
+			patch.ApplyTo(cityToPatch);
+
+			/// тут валидация должна быть посложнее,
+			/// и с атрибутами модели надо поподробнее подумать,
+			/// но это уже совсем другая история
+
+			TryValidateModel(cityToPatch);
+
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (cityToPatch.Name != default(string))
+				city.Name = cityToPatch.Name;
+			if (cityToPatch.Description != default(string))
+				city.Description = cityToPatch.Description;
+
+			/// ниже тоже небольшая несостыковочка
+			/// сознательно обнулить значение не сможем, но это не суть)
+			if (cityToPatch.NumberOfPointsOfInterest != default(int))
+				city.NumberOfPointsOfInterest = cityToPatch.NumberOfPointsOfInterest;
+
+			return CreatedAtRoute(
+				"GetCity",
+				new { id = city.Id },
+				city);
+		}
 	}
 }

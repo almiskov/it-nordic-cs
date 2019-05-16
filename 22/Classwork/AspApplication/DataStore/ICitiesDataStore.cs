@@ -1,13 +1,9 @@
-﻿using AspApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace AspApplication.DataStore
 {
 	public interface ICitiesDataStore
 	{
-		List<CityGetModel> Cities { get; }
+		List<CityDataStoreModel> Cities { get; }
 	}
 }

@@ -1,22 +1,18 @@
-﻿using AspApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace AspApplication.DataStore
 {
 	public class CitiesDataStore : ICitiesDataStore
 	{
-		public List<CityGetModel> Cities { get; private set; }
+		public List<CityDataStoreModel> Cities { get; private set; }
 
 		public CitiesDataStore()
 		{
-			Cities = new List<CityGetModel>()
+			Cities = new List<CityDataStoreModel>()
 				{
-					new CityGetModel {Id = 1, Name = "Moscow", Description = "The capital of Russia" },
-					new CityGetModel {Id = 2, Name = "New York", Description = "One of the biigest cities in the world"},
-					new CityGetModel {Id = 3, Name = "Stary Oskol", Description = "Just good city" }
+					new CityDataStoreModel {Id = 1, Name = "Moscow", Description = "The capital of Russia" },
+					new CityDataStoreModel {Id = 2, Name = "New York", Description = "One of the biigest cities in the world"},
+					new CityDataStoreModel {Id = 3, Name = "Stary Oskol", Description = "Just good city" }
 				};
 		}
 	}

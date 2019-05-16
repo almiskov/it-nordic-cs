@@ -1,6 +1,6 @@
-﻿namespace AspApplication.Models
+﻿namespace AspApplication.DataStore
 {
-	public class CityGetModel
+	public class CityDataStoreModel
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

@@ -1,10 +1,9 @@
 ﻿using AspApplication.Validation;
 using System.ComponentModel.DataAnnotations;
-using AspApplication.DataStore;
 
 namespace AspApplication.Models
 {
-	public class CityCreateModel
+	public class CityPutModel
 	{
 		[Required]
 		[MaxLength(100, ErrorMessage = "The name of the city should not be longer {1} characters")]
