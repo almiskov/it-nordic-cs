@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspApplication", "AspApplication\AspApplication.csproj", "{E591E368-54FE-4136-99BB-A2D80914027F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspApplication", "AspApplication\AspApplication.csproj", "{E591E368-54FE-4136-99BB-A2D80914027F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspApplication.Storage.Core", "AspApplication.Storage.Core\AspApplication.Storage.Core.csproj", "{E8D03207-9E19-4332-BB9F-F3027090D6E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E591E368-54FE-4136-99BB-A2D80914027F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E591E368-54FE-4136-99BB-A2D80914027F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E591E368-54FE-4136-99BB-A2D80914027F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8D03207-9E19-4332-BB9F-F3027090D6E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8D03207-9E19-4332-BB9F-F3027090D6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8D03207-9E19-4332-BB9F-F3027090D6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8D03207-9E19-4332-BB9F-F3027090D6E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

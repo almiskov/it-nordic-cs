@@ -1,9 +1,10 @@
 ﻿using System.Linq;
-using AspApplication.DataStore;
 using AspApplication.Models;
+using AspApplication.Storage.Core;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+
 
 namespace AspApplication.Controllers
 {
@@ -129,10 +130,7 @@ namespace AspApplication.Controllers
 			city.Description = newCity.Description;
 			city.NumberOfPointsOfInterest = newCity.NumberOfPointsOfInterest;
 
-			return CreatedAtRoute(
-				"GetCity",
-				new { id = city.Id },
-				city);
+			return NoContent();
 		}
 
 		[HttpPatch("{id}")]
@@ -152,35 +150,23 @@ namespace AspApplication.Controllers
 				return NotFound();
 			}
 
-			var cityToPatch = new CityPatchModel();
+			var cityToPatch = new CityPatchModel(city);
 
 			patch.ApplyTo(cityToPatch);
 
-			/// тут валидация должна быть посложнее,
-			/// и с атрибутами модели надо поподробнее подумать,
-			/// но это уже совсем другая история
-
-			TryValidateModel(cityToPatch);
-
-			if (!ModelState.IsValid)
+			if (!TryValidateModel(cityToPatch))
 			{
 				return BadRequest(ModelState);
 			}
 
-			if (cityToPatch.Name != default(string))
+			if(city.Name != cityToPatch.Name)
 				city.Name = cityToPatch.Name;
-			if (cityToPatch.Description != default(string))
+			if (city.Description != cityToPatch.Description)
 				city.Description = cityToPatch.Description;
-
-			/// ниже тоже небольшая несостыковочка
-			/// сознательно обнулить значение не сможем, но это не суть)
-			if (cityToPatch.NumberOfPointsOfInterest != default(int))
+			if (city.NumberOfPointsOfInterest != cityToPatch.NumberOfPointsOfInterest)
 				city.NumberOfPointsOfInterest = cityToPatch.NumberOfPointsOfInterest;
 
-			return CreatedAtRoute(
-				"GetCity",
-				new { id = city.Id },
-				city);
+			return NoContent();
 		}
 	}
 }

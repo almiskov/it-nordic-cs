@@ -3,12 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AspApplication.Models
 {
-	public class CityPatchModel
+	public class CityCreateModel
 	{
+		[Required]
 		[MaxLength(100, ErrorMessage = "The name of the city should not be longer {1} characters")]
 		public string Name { get; set; }
 
-		//[DifferentValue(OtherProperty = "Name")]
+		[DifferentValue(OtherProperty = "Name")]
 		[MaxLength(70, ErrorMessage = "Description should not be longer {1} characters")]
 		public string Description { get; set; }
 

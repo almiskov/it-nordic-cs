@@ -1,4 +1,4 @@
-﻿namespace AspApplication.DataStore
+﻿namespace AspApplication.Storage.Core
 {
 	public class CityDataStoreModel
 	{

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using AspApplication.Storage.Core;
 
-namespace AspApplication.DataStore
+namespace AspApplication.Storage.InMemory
 {
 	public class CitiesDataStore : ICitiesDataStore
 	{
@@ -11,7 +12,7 @@ namespace AspApplication.DataStore
 			Cities = new List<CityDataStoreModel>()
 				{
 					new CityDataStoreModel {Id = 1, Name = "Moscow", Description = "The capital of Russia" },
-					new CityDataStoreModel {Id = 2, Name = "New York", Description = "One of the biigest cities in the world"},
+					new CityDataStoreModel {Id = 2, Name = "New York", Description = "One of the biggest cities in the world"},
 					new CityDataStoreModel {Id = 3, Name = "Stary Oskol", Description = "Just good city" }
 				};
 		}

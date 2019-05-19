@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AspApplication.DataStore
+namespace AspApplication.Storage.Core
 {
 	public interface ICitiesDataStore
 	{

@@ -1,12 +1,11 @@
-﻿using AspApplication.Validation;
+﻿using AspApplication.Storage.Core;
+using AspApplication.Validation;
 using System.ComponentModel.DataAnnotations;
-using AspApplication.DataStore;
 
 namespace AspApplication.Models
 {
-	public class CityCreateModel
+	public class CityPatchModel
 	{
-		[Required]
 		[MaxLength(100, ErrorMessage = "The name of the city should not be longer {1} characters")]
 		public string Name { get; set; }
 
@@ -16,5 +15,12 @@ namespace AspApplication.Models
 
 		[Range(0, 100, ErrorMessage = "Number of points of interest should be between {1} and {2} characters")]
 		public int NumberOfPointsOfInterest { get; set; }
+
+		public CityPatchModel(CityDataStoreModel storeModel)
+		{
+			Name = storeModel.Name;
+			Description = storeModel.Description;
+			NumberOfPointsOfInterest = storeModel.NumberOfPointsOfInterest;
+		}
 	}
 }
