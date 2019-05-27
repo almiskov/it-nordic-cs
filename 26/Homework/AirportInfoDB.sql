@@ -29,14 +29,14 @@ INSERT INTO DepartureBoard
 VALUES
 	(
 		'ZF-8895',
-		'Russia', 'Surgut', '2019-06-27 05:40+05:00',
-		'Turkey', 'Antalya', '2019-06-27 09:35+03:00',
+		'Russia', 'Surgut', '2019-07-27 05:40+05:00',
+		'Turkey', 'Antalya', '2019-07-27 09:35+03:00',
 		'Azur Air', 'Boeing 777-300ER'
 	),
 	(
 		'ZF-4243',
-		'Russia', 'Moscow', '2019-05-27 09:20+03:00',
-		'USA', 'New York', '2019-05-27 12:15-04:00',
+		'Russia', 'Moscow', '2019-07-27 09:20+03:00',
+		'USA', 'New York', '2019-07-27 12:15-04:00',
 		'Aeroflot', 'Boeing 757-200'
 	)
 
