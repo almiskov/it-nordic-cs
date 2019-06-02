@@ -1,0 +1,6 @@
+-- DROP TYPE IF EXISTS [dbo].[ListId]
+
+CREATE TYPE dbo.ListGuid AS TABLE (
+	Id UNIQUEIDENTIFIER
+)
+GO
