@@ -6,12 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190624165810_InitialCreate.cs" />
-    <Compile Remove="Migrations\20190624171922_InitiaCreateL.cs" />
-    <Compile Remove="Migrations\20190624175158_UpdateCustomerName2.cs" />
+    <Compile Remove="Migrations\20190615204024_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190615210940_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190616210742_UpdateCustomerName3.cs" />
+    <Compile Remove="Migrations\20190616211630_UpdateOrderItems.cs" />
+    <Compile Remove="Migrations\20190616214543_UpdateOrderItems2.cs" />
+    <Compile Remove="Migrations\20190626160920_InitialCreate2.cs" />
+    <Compile Remove="Migrations\20190626161104_InitialCreate2.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4">
       <PrivateAssets>all</PrivateAssets>

@@ -33,7 +33,7 @@ namespace Lesson_34_Classwork.Data
             modelBuilder
                 .Entity<OrderItem>()
                     .HasKey("OrderID", "ProductId")
-                    .HasName("Pk_OrderItems");
+                    .HasName("PK_OrderItems");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
