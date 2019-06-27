@@ -4,6 +4,7 @@ namespace CorrespondenceEF.Domain
 {
 	public class SendingStatus
 	{
+		public int Id { get; set; }
 		public PostalItem PostalItem { get; set; }
 		public DateTimeOffset UpdateStatusDateTime { get; set; }
 		public Status Status { get; set; }

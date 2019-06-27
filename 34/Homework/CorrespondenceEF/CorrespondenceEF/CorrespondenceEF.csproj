@@ -6,7 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
+    <Compile Remove="Migrations\20190627203516_sme.cs" />
+    <Compile Remove="Migrations\20190627203516_sme.Designer.cs" />
+    <Compile Remove="Migrations\20190627203936_ooo.cs" />
+    <Compile Remove="Migrations\20190627203936_ooo.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
