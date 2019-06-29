@@ -10,6 +10,22 @@
     <Compile Remove="Migrations\20190627203516_sme.Designer.cs" />
     <Compile Remove="Migrations\20190627203936_ooo.cs" />
     <Compile Remove="Migrations\20190627203936_ooo.Designer.cs" />
+    <Compile Remove="Migrations\20190628205043_someMigration.cs" />
+    <Compile Remove="Migrations\20190628205043_someMigration.Designer.cs" />
+    <Compile Remove="Migrations\20190629104009_AddressModified.cs" />
+    <Compile Remove="Migrations\20190629104009_AddressModified.Designer.cs" />
+    <Compile Remove="Migrations\20190629105446_tablesModified.cs" />
+    <Compile Remove="Migrations\20190629105446_tablesModified.Designer.cs" />
+    <Compile Remove="Migrations\20190629110509_tablesModified2.cs" />
+    <Compile Remove="Migrations\20190629110509_tablesModified2.Designer.cs" />
+    <Compile Remove="Migrations\20190629110553_SendingStatusModified.cs" />
+    <Compile Remove="Migrations\20190629110553_SendingStatusModified.Designer.cs" />
+    <Compile Remove="Migrations\20190629120825_SendingStatusModified.cs" />
+    <Compile Remove="Migrations\20190629120825_SendingStatusModified.Designer.cs" />
+    <Compile Remove="Migrations\20190629201557_pkFoSsAdded.cs" />
+    <Compile Remove="Migrations\20190629201557_pkFoSsAdded.Designer.cs" />
+    <Compile Remove="Migrations\20190629202412_pkForSsAdded.cs" />
+    <Compile Remove="Migrations\20190629202412_pkForSsAdded.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

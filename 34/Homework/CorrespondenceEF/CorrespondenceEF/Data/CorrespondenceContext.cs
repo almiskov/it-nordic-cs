@@ -31,6 +31,16 @@ namespace CorrespondenceEF.Data
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 
+			modelBuilder
+				.Entity<SendingStatus>()
+				.HasKey(
+					"PostalItemId",
+					"UpdateStatusDateTime",
+					"StatusId",
+					"SendingContractorId",
+					"SendingAddressId",
+					"RecievingContractorId",
+					"RecievingAddressId");
 		}
 	}
 }
